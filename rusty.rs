@@ -1,19 +1,21 @@
-use std::io;
- 
-fn read_int()->Vec<i32> {
+
+fn read<T>()->Vec<T> 
+where 
+    T: std::str::FromStr,
+    <T as std::str::FromStr>::Err : std::fmt::Debug,
+{
     let mut inpt = String::new();
-    io::stdin().read_line(&mut inpt).unwrap();
-    let mut v : Vec<i32> = inpt.trim().split(" ").map(|x| x.parse().expect("NO")).collect();
-    return v;
-}
-fn read_i64()->Vec<i64> {
-    let mut inpt = String::new();
-    io::stdin().read_line(&mut inpt).unwrap();
-    let mut v : Vec<i64> = inpt.trim().split(" ").map(|x| x.parse().expect("NO")).collect();
+    std::io::stdin().read_line(&mut inpt).unwrap();
+    let v : Vec<T> = inpt.trim().split(" ").map(|x| x.parse().expect("NO")).collect();
     return v;
 }
 
-fn main(){
-    let n = read_int()[0];
-    
+
+fn main() {
+   let z = read::<String>()[0].clone();
+   let x: i32 = read()[0];
+   let y: i64 = read()[0];
+   println!("Sum of x and y = {:?} ",z);
+   println!("x = {}",x);
+   println!("y = {}",y);
 }
